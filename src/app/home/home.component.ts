@@ -1,9 +1,10 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-
 import { EthService } from '../eth.service';
-
 import * as moment from 'moment';
+
+declare var BancorConvertWidget: any
+
 
 @Component({
   selector: 'app-home',
@@ -50,6 +51,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
+    BancorConvertWidget.init({
+      'type': '1',
+      'baseCurrencyId': '5a6f61ece3de16000123763a',
+      'pairCurrencyId': '5937d635231e97001f744267',
+      'primaryColor': '#00BFFF',
+      'primaryColorHover': '#55DAFB'
+    });
+
     this.activatedRoute.params.subscribe( (params) => {
       // PARAM? = params['query'] ? params['query'] : '';
     });
