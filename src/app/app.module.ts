@@ -28,6 +28,7 @@ import { PageNotFoundComponent } from './pagenotfound/pagenotfound.component';
 import { PdfService } from './@service/pdf.service';
 import { IpfsService } from './@service/ipfs.service';
 import { FileComponent } from './file/file.component';
+import { FilesListComponent } from './files-list/files-list.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { FileComponent } from './file/file.component';
     FooterComponent,
     HomeComponent,
     PageNotFoundComponent,
-    FileComponent
+    FileComponent,
+    FilesListComponent
   ],
   imports: [
     BrowserModule,
@@ -53,6 +55,7 @@ import { FileComponent } from './file/file.component';
     NgxCurrencyModule
   ],
   providers: [AuthGuard, DatePipe, CurrencyPipe, EthService, PdfService, IpfsService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [FileComponent]
 })
 export class AppModule { }

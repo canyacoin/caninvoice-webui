@@ -1,4 +1,4 @@
-<article (click)="file">
+<article class="file">
   <div class="progress {{pctg == '100%' ? 'fade-out' : ''}}">
     <span [style.width]="pctg"></span>
   </div>
@@ -7,5 +7,15 @@
   </div>
   <div class="file-size" *ngIf="!isUploading">
     <span>{{ size }}</span>
+  </div>
+  <div class="actions" *ngIf="!isUploading">
+    <div class="dropdown-wrapper">
+      <i class="fa fa-ellipsis-v"></i>
+      <div class="dropdown">
+        <a class="item" href="{{ canShareLink }}" target="_blank"><span>Share via CanShare <i class="fa fa-share-alt"></i></span></a>
+        <a class="item" href="{{ ipfsLink }}" target="_blank"><span>View PDF <i class="fa fa-external-link-alt"></i></span></a>
+        <span class="item copy-{{ipfsHash}}">Copy file link</span>
+      </div>
+    </div>
   </div>
 </article>
