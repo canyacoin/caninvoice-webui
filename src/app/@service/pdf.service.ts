@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { IpfsService } from '@service/ipfs.service';
 import * as jsPDF from 'jspdf';
 
 declare let document: any
@@ -10,7 +11,7 @@ declare let window: any
 @Injectable()
 export class PdfService {
 
-  constructor() { }
+  constructor(private ipfs: IpfsService) {}
 
   /**
    * [generate description]
@@ -165,8 +166,26 @@ export class PdfService {
     let html = head + body + footer;
 
     window.html2pdf(html, pdf, () => {
-      pdf.save('invoice.pdf')
+      // pdf.save('invoice.pdf')
+
+      let reader = new FileReader();
+
+      reader.onloadend = (file) => {
+        this.ipfs.fileCount++;
+
+        let fileObj = {
+          index: this.ipfs.fileCount,
+          name: 'Invoice 001',
+          type: 'application/pdf',
+          size: file.total,
+          progress: 0,
+        };
+
+        this.ipfs.onFileAdded.next(fileObj);
+        this.ipfs.queue(reader.result, fileObj);
+      }
+
+      reader.readAsArrayBuffer(pdf.output('blob'));
     });
   }
-
 }
