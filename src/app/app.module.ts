@@ -25,6 +25,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './pagenotfound/pagenotfound.component';
+import { PdfService } from './@service/pdf.service';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,7 @@ import { PageNotFoundComponent } from './pagenotfound/pagenotfound.component';
     AngularFirestoreModule.enablePersistence(), // imports firebase/firestore, only needed for database features
     NgxCurrencyModule
   ],
-  providers: [AuthGuard, DatePipe, CurrencyPipe, EthService],
+  providers: [AuthGuard, DatePipe, CurrencyPipe, EthService, PdfService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
+import { PdfService } from '@service/pdf.service';
 
 @Component({
   selector: 'app-top',
@@ -16,10 +17,16 @@ export class TopComponent implements OnInit {
   @Output() invoiceSelected: EventEmitter<any> = new EventEmitter();
   @Output() print: EventEmitter<any> = new EventEmitter();
 
-  constructor(private router: Router) { }
+  constructor(
+    private router: Router,
+    public pdf: PdfService) { }
 
   ngOnInit() {
     console.log('TopComponent - ngOnInit', this.currentInvoice, this.invoicesList);
+  }
+
+  onExport(){
+    this.pdf.generate();
   }
 
   onSelectInvoice(event: any) {
