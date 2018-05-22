@@ -29,6 +29,7 @@ export class FileComponent implements OnInit {
   ipfsHash: string
 
   isUploading: boolean = true
+  streamEnded: boolean = false
 
   constructor(
     private zone: NgZone,

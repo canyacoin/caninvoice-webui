@@ -38,12 +38,17 @@ export class FilesListComponent implements OnInit {
       this.fileComponents[data.index].instance.pctg = data.pctg;
     });
 
+    ipfs.onStreamEnd.subscribe(data => {
+      this.fileComponents[data.index].instance.streamEnded = true;
+    });
+
     ipfs.onFileUploadEnd.subscribe(({ ipfsFile, fileObj }) => {
       let fileComponent = this.fileComponents[fileObj.index].instance;
 
       fileComponent.ipfsHash = ipfsFile.hash;
       fileComponent.renderIpfsLink();
       fileComponent.isUploading = false;
+      fileComponent.streamEnded = false;
     });
   }
 

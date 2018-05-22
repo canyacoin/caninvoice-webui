@@ -4,6 +4,12 @@
   }
 }
 
+@keyframes flash {
+  0% { opacity: 1; }
+  50% { opacity: .1; }
+  100% { opacity: 1; }
+}
+
 .file {
   @include flex-row;
   border-bottom: 1px solid $gray-100;
@@ -20,7 +26,8 @@
   .content,
   .cancel-upload,
   .file-size,
-  .actions {
+  .actions,
+  .still-working {
     @include flex-column-center;
     padding-right: $container-fluid;
     padding-left: $container-fluid;
@@ -31,6 +38,10 @@
   }
   .cancel-upload {
     width: 30%;
+  }
+  .still-working {
+    animation: flash linear 1.5s infinite;
+    width: 40%;
   }
   .file-size {
     width: 30%;

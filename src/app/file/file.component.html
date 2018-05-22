@@ -5,6 +5,9 @@
   <div class="content">
     <span class="name">{{ name }}</span>
   </div>
+  <div class="still-working" *ngIf="streamEnded">
+    <span>still working</span>
+  </div>
   <div class="file-size" *ngIf="!isUploading">
     <span>{{ size }}</span>
   </div>
