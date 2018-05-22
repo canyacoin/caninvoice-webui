@@ -1,0 +1,11 @@
+<article (click)="file">
+  <div class="progress {{pctg == '100%' ? 'fade-out' : ''}}">
+    <span [style.width]="pctg"></span>
+  </div>
+  <div class="content">
+    <span class="name">{{ name }}</span>
+  </div>
+  <div class="file-size" *ngIf="!isUploading">
+    <span>{{ size }}</span>
+  </div>
+</article>

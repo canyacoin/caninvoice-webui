@@ -27,6 +27,7 @@ import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './pagenotfound/pagenotfound.component';
 import { PdfService } from './@service/pdf.service';
 import { IpfsService } from './@service/ipfs.service';
+import { FileComponent } from './file/file.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { IpfsService } from './@service/ipfs.service';
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    FileComponent
   ],
   imports: [
     BrowserModule,
