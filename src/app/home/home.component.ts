@@ -5,7 +5,6 @@ import * as moment from 'moment';
 
 declare var BancorConvertWidget: any
 
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
