@@ -4,6 +4,7 @@ import { IpfsService } from '@service/ipfs.service';
 declare var require: any
 
 const clipboard = require('clipboard');
+const filesize = require('filesize');
 
 @Component({
   selector: 'app-file',
@@ -31,9 +32,13 @@ export class FileComponent implements OnInit {
   isUploading: boolean = true
   streamEnded: boolean = false
 
+  filesize: any
+
   constructor(
     private zone: NgZone,
-    private ipfs: IpfsService) { }
+    private ipfs: IpfsService) {
+    this.filesize = filesize
+  }
 
   ngOnInit() {
   }
@@ -45,7 +50,7 @@ export class FileComponent implements OnInit {
 
     this.ipfsLink = link;
 
-    this.canShareLink = `https://canshare.io/share/${this.ipfsHash}?name=invoice 001`;
+    this.canShareLink = `https://canshare.io/share/${this.ipfsHash}?name=${this.name}&size=${this.size}`;
 
     this.zone.run(() => console.log('file zone ran'));
 

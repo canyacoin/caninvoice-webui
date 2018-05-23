@@ -9,7 +9,7 @@
     <span>still working</span>
   </div>
   <div class="file-size" *ngIf="!isUploading">
-    <span>{{ size }}</span>
+    <span>{{ filesize(size) }}</span>
   </div>
   <div class="actions" *ngIf="!isUploading">
     <div class="dropdown-wrapper">

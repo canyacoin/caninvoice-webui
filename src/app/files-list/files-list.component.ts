@@ -6,7 +6,6 @@ declare var require: any;
 declare var window: any;
 declare var document: any;
 
-const filesize = require('filesize');
 const _ = require('lodash');
 
 @Component({
@@ -63,7 +62,7 @@ export class FilesListComponent implements OnInit {
 
     file.instance.name = data.name;
 
-    file.instance.size = filesize(data.size);
+    file.instance.size = data.size;
 
     file.instance.pctg = '0%';
 
