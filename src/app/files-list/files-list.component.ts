@@ -47,7 +47,6 @@ export class FilesListComponent implements OnInit {
       let fileComponent = this.fileComponents[fileObj.index].instance;
 
       let fileExists = this.ls.getCurrentInvoice().ipfsHash == ipfsFile.hash;
-      console.log(this.ls.getCurrentInvoice().ipfsHash, ipfsFile.hash, fileExists);
       if (fileExists) {
         this.fileComponents[fileObj.index].destroy();
         delete this.fileComponents[fileObj.index];

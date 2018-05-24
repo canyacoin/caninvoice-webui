@@ -44,8 +44,6 @@ export class FileComponent implements OnInit {
   }
 
   renderIpfsLink() {
-    console.log(this.ipfsHash);
-
     let link = `${this.ipfs.gatewayURL}/${this.ipfsHash}`;
 
     this.ipfsLink = link;
