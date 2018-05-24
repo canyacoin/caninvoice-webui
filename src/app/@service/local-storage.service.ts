@@ -14,4 +14,16 @@ export class LocalStorageService {
 
     return JSON.parse(localStorage.getItem(number));
   }
+
+  getInvoicesList(){
+    return JSON.parse(localStorage.getItem('invoices'));
+  }
+
+  updateCurrentInvoice(data){
+    let currentInvoice = this.getCurrentInvoice();
+
+    let updatedInvoice = Object.assign(data, currentInvoice);
+
+    localStorage.setItem(this.getCurrentInvoiceNumber(), JSON.stringify(updatedInvoice));
+  }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ComponentFactory, ComponentRef, ComponentFactoryResolver, ViewContainerRef } from '@angular/core';
 import { IpfsService } from '@service/ipfs.service';
+import { LocalStorageService } from '@service/local-storage.service';
 import { FileComponent } from '../file/file.component';
 
 declare var require: any;
@@ -26,6 +27,7 @@ export class FilesListComponent implements OnInit {
 
   constructor(
     private ipfs: IpfsService,
+    private ls: LocalStorageService,
     private resolver: ComponentFactoryResolver) {
 
     ipfs.onFileAdded.subscribe(data => {
@@ -44,10 +46,20 @@ export class FilesListComponent implements OnInit {
     ipfs.onFileUploadEnd.subscribe(({ ipfsFile, fileObj }) => {
       let fileComponent = this.fileComponents[fileObj.index].instance;
 
+      let fileExists = this.ls.getCurrentInvoice().ipfsHash == ipfsFile.hash;
+      console.log(this.ls.getCurrentInvoice().ipfsHash, ipfsFile.hash, fileExists);
+      if (fileExists) {
+        this.fileComponents[fileObj.index].destroy();
+        delete this.fileComponents[fileObj.index];
+        return false;
+      }
+
       fileComponent.ipfsHash = ipfsFile.hash;
       fileComponent.renderIpfsLink();
       fileComponent.isUploading = false;
       fileComponent.streamEnded = false;
+
+      this.ls.updateCurrentInvoice({ipfsHash: ipfsFile.hash});
     });
   }
 

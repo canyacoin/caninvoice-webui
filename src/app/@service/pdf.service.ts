@@ -185,7 +185,7 @@ export class PdfService {
 
         let fileObj = {
           index: this.ipfs.fileCount,
-          name: 'Invoice 001',
+          name: `Invoice ${invoice.id}`,
           type: 'application/pdf',
           size: file.total,
           progress: 0,
