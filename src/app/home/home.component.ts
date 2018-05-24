@@ -168,6 +168,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       const reader = new FileReader();
       reader.onload = (e: any) => {
         this.invoice.logo = e.target.result;
+        this.onSaveInvoice();
       };
       reader.readAsDataURL(event.target.files[0]);
     }

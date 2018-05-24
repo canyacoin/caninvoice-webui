@@ -1,23 +1,29 @@
 import { Injectable } from '@angular/core';
+import { CurrencyPipe } from '@angular/common';
 import { IpfsService } from '@service/ipfs.service';
+import { CalcService } from '@service/calc.service';
+import { LocalStorageService } from '@service/local-storage.service';
 import * as jsPDF from 'jspdf';
 
 declare let document: any
 declare let window: any
-// declare let require: any
-
-// const pdf = require('html-pdf');
 
 @Injectable()
 export class PdfService {
 
-  constructor(private ipfs: IpfsService) {}
+  constructor(
+    private ipfs: IpfsService,
+    private ls: LocalStorageService,
+    private calc: CalcService,
+    private currency: CurrencyPipe) {}
 
   /**
    * [generate description]
    * code from https://www.codementor.io/amehjoseph/convert-html-css-content-to-a-sleek-multiple-page-pdf-file-using-jspdf-javascript-library-eyyz74hci
    */
   generate(){
+    let invoice = this.ls.getCurrentInvoice();
+
     let pdf = new jsPDF('p', 'pt', 'letter')
 
     let head = `
@@ -61,7 +67,7 @@ export class PdfService {
             color: #000000;
           }
           .logo {
-            width: 180px;
+            max-width: 120px;
             height: auto;
           }
           .terms {
@@ -87,25 +93,25 @@ export class PdfService {
 
     let body = `<body>
               <div id="invoice-wrapper">
-                <h1>Invoice #001</h1>
+                <h1>Invoice #${invoice.id}</h1>
                 <hr>
                 <table>
                   <tbody>
                     <tr>
                       <td>
                         <h5 class="bold">To:</h5>
-                        <p>Vitalik But. Level 1 520 Bourke St Melbourne, VIC Australia</p>
+                        <p>${invoice.to}</p>
                       </td>
                       <td>
-                        <img src="assets/img/logo-media.png" class="logo"></img>
-                        <p>Vitalik But. Level 1 520 Bourke St Melbourne, VIC Australia</p>
+                        <img src="${invoice.logo}" class="logo"></img>
+                        <p>${invoice.from}</p>
                       </td>
                     </tr>
                     <tr>
                       <td></td>
                       <td>
                         <h5 class="bold">Date:</h5>
-                        <p>05/22/2018</p>
+                        <p>${invoice.date}</p>
                       </td>
                     </tr>
                   </tbody>
@@ -119,45 +125,49 @@ export class PdfService {
                       <th>Amount</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <td class="text-left">Custom logo + style guide</td>
-                      <td>1</td>
-                      <td>$200.00</td>
-                      <td>$200.00</td>
-                    </tr>
-                    <tr>
+                  <tbody>`
+
+    invoice.items.forEach(item => {
+      let tr = `<tr>
+                  <td class="text-left">${item.title}</td>
+                  <td>${item.quantity}</td>
+                  <td>${this.currency.transform(item.rate)}</td>
+                  <td>${this.currency.transform(item.rate * item.quantity)}</td>
+                </tr>`
+      body += tr
+    })
+
+    body += `<tr>
                       <td></td>
                       <td></td>
                       <td class="bold">Subtotal</td>
-                      <td>$200.00</td>
+                      <td>${this.currency.transform(this.calc.getSum(invoice))}</td>
                     </tr>
                     <tr>
                       <td></td>
                       <td></td>
                       <td class="bold">Tax</td>
-                      <td>0%</td>
+                      <td>${invoice.option.value.toString() + invoice.option.config.suffix}</td>
                     </tr>
                     <tr>
                       <td></td>
                       <td></td>
                       <td class="bold">Amount Paid</td>
-                      <td>$0.00</td>
+                      <td>${this.currency.transform(invoice.paid)}</td>
                     </tr>
                     <tr>
                       <td></td>
                       <td></td>
                       <td class="bold">Balance Due</td>
-                      <td>$200.00</td>
+                      <td>${this.currency.transform(this.calc.getTotal(invoice))}</td>
                     </tr>
                   </tbody>
                 </table>
                 <div class="terms">
-                  <p>Terms: To be paid in CanYaCoin 7 days from date of invoice, late payments will incur a 20% extra charge. ETH address: 0x24b2e8C86Cc5a378b184b64728dB1A8484D844eC.</p>
+                  <p>${invoice.terms}</p>
                 </div>
               </div>
-            </body>
-                `
+            </body>`
 
     let footer = `
       </html>
