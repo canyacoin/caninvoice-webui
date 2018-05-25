@@ -1,0 +1,14 @@
+@import "./node_modules/bootstrap/scss/functions";
+@import "./src/assets/sass/_bootstrap-variables";
+
+@import "./src/assets/sass/ebm-variables";
+@import "./node_modules/ebm/functions/ebm-functions";
+@import "./node_modules/ebm/helpers/ebm-helpers";
+
+@import "./src/assets/sass/fontawesome/fontawesome";
+@import "./src/assets/sass/fontawesome/fa-brands";
+@import "./src/assets/sass/fontawesome/fa-solid";
+
+$bold: 700;
+
+@import "./src/assets/sass/common/file-component";

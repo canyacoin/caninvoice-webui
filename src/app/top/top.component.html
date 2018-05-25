@@ -1,7 +1,7 @@
 <!-- Topbar -->
 <nav class="topbar topbar-expand-md topbar-sticky" id="section-top">
   <div class="container">
-    
+
     <div class="topbar-left">
       <button class="topbar-toggler text-gray">&#9776;</button>
       <a class="topbar-brand" [routerLink]="['/home']">
@@ -11,40 +11,51 @@
     </div>
 
     <div class="topbar-right">
-      <ul class="topbar-nav nav">
+      <ul class="topbar-nav nav mr-3">
         <!-- <li class="nav-item"><a class="nav-link" href="https://canya25.com" target="_blank">CanYa25</a></li> -->
-        
+
         <li *ngIf="state === 'loaded' && (invoicesList && invoicesList.length > 00)" class="nav-item">
           <a class="nav-link">Invoices</a>
           <div class="nav-submenu">
-            <a *ngFor="let invoiceObject of invoicesList" (click)="onSelectInvoice(invoiceObject);" 
+            <a *ngFor="let invoiceObject of invoicesList" (click)="onSelectInvoice(invoiceObject);"
               class="nav-link"
               [ngClass]="{ 'active': currentInvoice && currentInvoice.id === invoiceObject.id }"
               style="cursor: pointer;">{{invoiceObject.id}}</a>
           </div>
 
           <!-- <div class="dropdown show drop-option">
-            <a id="dropdownInvoices" href="#" 
+            <a id="dropdownInvoices" href="#"
               class="nav-link"
-              role="button" 
+              role="button"
               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Invoices
             </a>
             <div class="dropdown-menu" aria-labelledby="dropdownInvoices">
-              <button  class="btn dropdown-item" 
+              <button  class="btn dropdown-item"
                 (click)="onInvoice();"
                 [ngClass]="{ 'active': currentInvoice.id === invoice.id }" style="max-height: 24px;">&nbsp;&nbsp;{{invoice.id}}</button>
             </div>
           </div> -->
 
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://blog.canya.com.au/" target="_blank">Blog</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://forum.canya.io" target="_blank">Forum</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://t.me/canyacoin" target="_blank">Telegram</a>
+        </li>
       </ul>
-      &nbsp;&nbsp;
 
       <button *ngIf="state === 'loaded'" (click)="onPrint($event);" class="btn btn-sm btn-outline btn-primary">
         PRINT
       </button>
-        
+
+      <button *ngIf="state === 'loaded'" (click)="onExport()" class="btn btn-sm btn-primary">
+        Share with Client
+      </button>
     </div>
 
   </div>

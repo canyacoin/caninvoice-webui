@@ -25,6 +25,12 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './pagenotfound/pagenotfound.component';
+import { PdfService } from './@service/pdf.service';
+import { IpfsService } from './@service/ipfs.service';
+import { FileComponent } from './file/file.component';
+import { FilesListComponent } from './files-list/files-list.component';
+import { LocalStorageService } from './@service/local-storage.service';
+import { CalcService } from './@service/calc.service';
 
 @NgModule({
   declarations: [
@@ -33,7 +39,9 @@ import { PageNotFoundComponent } from './pagenotfound/pagenotfound.component';
     HeaderComponent,
     FooterComponent,
     HomeComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    FileComponent,
+    FilesListComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +56,8 @@ import { PageNotFoundComponent } from './pagenotfound/pagenotfound.component';
     AngularFirestoreModule.enablePersistence(), // imports firebase/firestore, only needed for database features
     NgxCurrencyModule
   ],
-  providers: [AuthGuard, DatePipe, CurrencyPipe, EthService],
-  bootstrap: [AppComponent]
+  providers: [AuthGuard, DatePipe, CurrencyPipe, EthService, PdfService, IpfsService, LocalStorageService, CalcService],
+  bootstrap: [AppComponent],
+  entryComponents: [FileComponent]
 })
 export class AppModule { }
