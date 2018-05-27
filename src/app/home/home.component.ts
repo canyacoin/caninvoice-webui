@@ -15,8 +15,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   // Current user?
   currentUser: any = JSON.parse( localStorage.getItem('credentials') );
 
-  loading = true;
-  state = 'loading';
+  loading = false;
+  state = 'loaded';
   balance = 0;
   account = 'INSERT PUBLIC KEY HERE';
 
@@ -64,43 +64,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     setTimeout( () => {
       this.transformInvoices();
     }, 1000);
-
-    this.ethService.initWeb3();
-    this.ethService.web3InitObservable.subscribe( (state) => {
-
-      console.log('LoginComponent - state', this.state);
-
-      if ( !state.isMetaMaskAvailable ) {
-        this.loading = false;
-        this.state = 'metaMaskNotAvailable';
-      } else if ( state.isMetaMaskAvailable && state.netId !== 1 ) {
-        this.loading = false;
-        this.state = 'switchToMainNet';
-      } else if ( state.isMetaMaskAvailable && state.netId === 1 && !state.isWalletUnlocked ) {
-        this.loading = false;
-        this.state = 'walletLocked';
-      } else {
-        console.log('LoginComponent - state', this.state, this.ethService.account);
-        if (this.ethService.account) {
-          this.account = this.ethService.account;
-          this.invoice['terms'] = 'Terms: To be paid in CanYaCoin 7 days from date of invoice, late payments will incur a 20% extra charge.\nETH address: ' + this.account + '.';
-          this.ethService.getBalanceBN().then( (balance: any) => {
-            this.loading = false;
-            const minCAN = this.ethService.web3.utils.toBN( this.ethService.web3.utils.toWei('100', 'mwei') );
-            console.log('getBalanceBN', balance.toString(10), minCAN.toString(10));
-            if ( balance.gte(minCAN) ) {
-              this.state = 'loaded';
-            } else {
-              this.state = 'buyCAN';
-            }
-            console.log('getBalanceBN - state', this.state);
-          });
-        } else {
-          this.state = 'badConnection';
-          this.loading = false;
-        }
-      }
-    });
   }
 
   transformInvoices() {
