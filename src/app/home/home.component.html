@@ -28,149 +28,149 @@
 
           <div class="container">
 
-            <div class="row">
-              <div class="col-12">
-                <h2>Invoice #
+            <div class="row align-items-center">
+              <div class="col-9">
+                <h2 class="m-0">Invoice #
                   <input [(ngModel)]="invoice.id" (ngModelChange)="onNewInvoice();" name="invoiceId" class="form-control d-inline fs-30"
                     type="text" placeholder="Invoice id">
                 </h2>
-                <hr>
-                <div class="row">
-                  <div class="col-7">
-                    <strong>To:</strong>
-                    <textarea [(ngModel)]="invoice.to" (ngModelChange)="onSaveInvoice();" name="toAddress" class="form-control address" placeholder="Address"></textarea>
-                  </div>
-                  <div class="col-5">
-                    <p class="my-1 hidden-print">
-                      <a href="#" (click)="onChangeLogo();">Change logo</a> |
-                      <a href="#" (click)="onRemoveLogo();">Remove logo</a>
-                    </p>
-                    <input id="fileLogo" (change)="onFile($event);" (ngModelChange)="onSaveInvoice();" style="display: none;" type="file" accept="image/jpeg,image/jpg,image/png,image/gif,image/svg"
-                    />
-                    <img *ngIf="invoice.logo" [src]="invoice.logo" class="mb-1" width="auto" height="50px" alt="CanInvoice">
-                    <textarea [(ngModel)]="invoice.from" (ngModelChange)="onSaveInvoice();" name="fromAddress" class="form-control address" placeholder="Address"></textarea>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-7"></div>
-                  <div class="col-5">
-                    <address>
-                      <strong>Date:</strong>
-                      <input [(ngModel)]="invoice.date" (ngModelChange)="onSaveInvoice();" name="invoiceDate" type="date" class="form-control">
-                    </address>
-                  </div>
-                </div>
-
               </div>
-
+              <div class="col-3">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text">Currency code:</span>
+                  </div>
+                  <input type="text" [(ngModel)]="currencyService.code" class="form-control" value="USD">
+                </div>
+              </div>
             </div>
-            <!-- row -->
-
+            <hr>
             <div class="row">
-              <div class="col-md-12 table-responsive-lg">
-                <table class="table table-condensed table-bordered">
-                  <thead>
-                    <tr>
-                      <th style="min-width: 400px;">
-                        <strong>Item</strong>
-                      </th>
-                      <th class="text-center">
-                        <strong>Quantity</strong>
-                      </th>
-                      <th class="text-center">
-                        <strong>Rate</strong>
-                      </th>
-                      <th class="text-center" style="min-width: 100px;">
-                        <strong>Amount</strong>
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let item of invoice.items; let i = index" class="item-row">
-                      <td>
-                        <div class="drop-del-container">
-                          <textarea [(ngModel)]="item.title" (ngModelChange)="onSaveInvoice();" name="title" rows="3" class="form-control description"></textarea>
-                          <button *ngIf="i > 0" (click)="onRemoveItem(i, item);" class="delete-row hidden-print">
-                            <span class="ti-close fs-14 fw-600" aria-hidden="true"></span>
-                          </button>
-                        </div>
-                      </td>
-                      <td>
-                        <input [(ngModel)]="item.quantity" (ngModelChange)="onSaveInvoice();" name="quantity" type="number" class="form-control text-center qty">
-                      </td>
-                      <td>
-                        <textarea currencyMask [(ngModel)]="item.rate" (ngModelChange)="onSaveInvoice();" name="rate" class="form-control text-center"
-                          style="height: 24px;"></textarea>
-                      </td>
-                      <td class="text-center">
-                        <span class="price">{{ item.quantity * item.rate | currency }}</span>
-                      </td>
-                    </tr>
-                    <tr class='hidden-print'>
-                      <td colspan="4">
-                        <button (click)="onAddItem();" class="btn btn-sm btn-success">Add item</button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td colspan="2" class="thick-line"></td>
-                      <td class="thick-line text-center">
-                        <strong>Subtotal</strong>
-                      </td>
-                      <td class="thick-line text-center">
-                        <div>{{ getSum() | currency }}</div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td colspan="2" class="no-line"></td>
-                      <td class="no-line text-center">
-                        <input [(ngModel)]="invoice.option.title" (ngModelChange)="onSaveInvoice();" name="optionTitle" type="text" class="form-control text-center fs-16 fw-600"
-                          style="color: #535353;">
-                      </td>
-                      <td class="no-line text-center">
-                        <input currencyMask [(ngModel)]="invoice.option.value" (ngModelChange)="onSaveInvoice();" [options]="invoice.option.config"
-                          name="optionValue" type="text" class="form-control text-center">
-                        <div class="drop-del-container hidden-print">
-                          <div class="dropdown show drop-option">
-                            <a id="dropdownOptions" href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&nbsp;</a>
+              <div class="col-7">
+                <strong>To:</strong>
+                <textarea [(ngModel)]="invoice.to" (ngModelChange)="onSaveInvoice();" name="toAddress" class="form-control address" placeholder="Address"></textarea>
+              </div>
+              <div class="col-5">
+                <p class="my-1 hidden-print">
+                  <a href="#" (click)="onChangeLogo();">Change logo</a> |
+                  <a href="#" (click)="onRemoveLogo();">Remove logo</a>
+                </p>
+                <input id="fileLogo" (change)="onFile($event);" (ngModelChange)="onSaveInvoice();" style="display: none;" type="file" accept="image/jpeg,image/jpg,image/png,image/gif,image/svg"
+                />
+                <img *ngIf="invoice.logo" [src]="invoice.logo" class="mb-1" width="auto" height="50px" alt="CanInvoice">
+                <textarea [(ngModel)]="invoice.from" (ngModelChange)="onSaveInvoice();" name="fromAddress" class="form-control address" placeholder="Address"></textarea>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-7"></div>
+              <div class="col-5">
+                <address>
+                  <strong>Date:</strong>
+                  <input [(ngModel)]="invoice.date" (ngModelChange)="onSaveInvoice();" name="invoiceDate" type="date" class="form-control">
+                </address>
+              </div>
+            </div>
 
-                            <div class="dropdown-menu" aria-labelledby="dropdownOptions">
-                              <button class="btn dropdown-item" (click)="onOption('Flat ($)');" [ngClass]="{ 'active': invoice.option.type === 'Flat ($)' }">&nbsp;&nbsp;Flat ($)</button>
-                              <button class="btn dropdown-item" (click)="onOption('Percent (%)');" [ngClass]="{ 'active': invoice.option.type === 'Percent (%)' }">&nbsp;&nbsp;Percent (%)</button>
-                            </div>
+            <div class="table-responsive-lg">
+              <table class="table table-condensed table-bordered">
+                <thead>
+                  <tr>
+                    <th style="min-width: 400px;">
+                      <strong>Item</strong>
+                    </th>
+                    <th class="text-center">
+                      <strong>Quantity</strong>
+                    </th>
+                    <th class="text-center">
+                      <strong>Rate</strong>
+                    </th>
+                    <th class="text-center" style="min-width: 100px;">
+                      <strong>Amount</strong>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of invoice.items; let i = index" class="item-row">
+                    <td>
+                      <div class="drop-del-container">
+                        <textarea [(ngModel)]="item.title" (ngModelChange)="onSaveInvoice();" name="title" rows="3" class="form-control description"></textarea>
+                        <button *ngIf="i > 0" (click)="onRemoveItem(i, item);" class="delete-row hidden-print">
+                          <span class="ti-close fs-14 fw-600" aria-hidden="true"></span>
+                        </button>
+                      </div>
+                    </td>
+                    <td>
+                      <input [(ngModel)]="item.quantity" (ngModelChange)="onSaveInvoice();" name="quantity" type="number" class="form-control text-center qty">
+                    </td>
+                    <td>
+                      <textarea currencyMask [options]="{ prefix: currencyService.code }" [(ngModel)]="item.rate" (ngModelChange)="onSaveInvoice();" name="rate" class="form-control text-center"
+                        style="height: 24px;"></textarea>
+                    </td>
+                    <td class="text-center">
+                      <span class="price">{{ item.quantity * item.rate | currency:currencyService.code:'code' }}</span>
+                    </td>
+                  </tr>
+                  <tr class='hidden-print'>
+                    <td colspan="4">
+                      <button (click)="onAddItem();" class="btn btn-sm btn-success">Add item</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="2" class="thick-line"></td>
+                    <td class="thick-line text-center">
+                      <strong>Subtotal</strong>
+                    </td>
+                    <td class="thick-line text-center">
+                      <div>{{ getSum() | currency:currencyService.code:'code' }}</div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="2" class="no-line"></td>
+                    <td class="no-line text-center">
+                      <input [(ngModel)]="invoice.option.title" (ngModelChange)="onSaveInvoice();" name="optionTitle" type="text" class="form-control text-center fs-16 fw-600"
+                        style="color: #535353;">
+                    </td>
+                    <td class="no-line text-center">
+                      <input currencyMask [(ngModel)]="invoice.option.value" (ngModelChange)="onSaveInvoice();" [options]="invoice.option.config"
+                        name="optionValue" type="text" class="form-control text-center">
+                      <div class="drop-del-container hidden-print">
+                        <div class="dropdown show drop-option">
+                          <a id="dropdownOptions" href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&nbsp;</a>
+
+                          <div class="dropdown-menu" aria-labelledby="dropdownOptions">
+                            <button class="btn dropdown-item" (click)="onOption('Flat ($)');" [ngClass]="{ 'active': invoice.option.type === 'Flat ($)' }">&nbsp;&nbsp;Flat ($)</button>
+                            <button class="btn dropdown-item" (click)="onOption('Percent (%)');" [ngClass]="{ 'active': invoice.option.type === 'Percent (%)' }">&nbsp;&nbsp;Percent (%)</button>
                           </div>
                         </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td colspan="2" class="no-line"></td>
-                      <td class="no-line text-center">
-                        <strong>Amount Paid</strong>
-                      </td>
-                      <td class="no-line">
-                        <textarea currencyMask [(ngModel)]="invoice.paid" (ngModelChange)="onSaveInvoice();" name="paid" class="form-control text-center"
-                          style="height: 24px;"></textarea>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td colspan="2" class="no-line"></td>
-                      <td class="no-line text-center">
-                        <strong>Balance Due</strong>
-                      </td>
-                      <td class="no-line text-center">
-                        <div>{{ getTotal() | currency }}</div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <div class="m-5">
-                  <h5 class="text-center">Terms</h5>
-                  <textarea [(ngModel)]="invoice.terms" (ngModelChange)="onSaveInvoice();" name="terms" class="form-control text-center"></textarea>
-                </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="2" class="no-line"></td>
+                    <td class="no-line text-center">
+                      <strong>Amount Paid</strong>
+                    </td>
+                    <td class="no-line">
+                      <textarea currencyMask [options]="{ prefix: currencyService.code }" [(ngModel)]="invoice.paid" (ngModelChange)="onSaveInvoice();" name="paid" class="form-control text-center"
+                        style="height: 24px;"></textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="2" class="no-line"></td>
+                    <td class="no-line text-center">
+                      <strong>Balance Due</strong>
+                    </td>
+                    <td class="no-line text-center">
+                      <div>{{ getTotal() | currency:currencyService.code:'code' }}</div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="m-5">
+                <h5 class="text-center">Terms</h5>
+                <textarea [(ngModel)]="invoice.terms" (ngModelChange)="onSaveInvoice();" name="terms" class="form-control text-center"></textarea>
               </div>
-
             </div>
-            <!-- row -->
-
           </div>
           <!-- container -->
 

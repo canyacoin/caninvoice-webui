@@ -12,3 +12,17 @@
 $bold: 700;
 
 @import "./src/assets/sass/common/file-component";
+
+.input-group {
+  border: none;
+  .input-group {
+    border-left: 1px solid $input-border-color;
+  }
+  .input-group-text {
+    background-color: transparent;
+  }
+  .form-control {
+    padding-left: get-spacer(2) !important;
+    border: 1px solid $input-border-color !important;
+  }
+}

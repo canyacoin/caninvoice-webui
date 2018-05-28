@@ -1,6 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { EthService } from '../eth.service';
+import { CurrencyService } from '@service/currency.service';
 import * as moment from 'moment';
 
 declare var BancorConvertWidget: any
@@ -41,7 +42,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   constructor(private router: Router,
     private activatedRoute:  ActivatedRoute,
-    private ethService: EthService) {
+    private ethService: EthService,
+    public currencyService: CurrencyService) {
 
   }
 

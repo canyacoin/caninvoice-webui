@@ -31,6 +31,7 @@ import { FileComponent } from './file/file.component';
 import { FilesListComponent } from './files-list/files-list.component';
 import { LocalStorageService } from './@service/local-storage.service';
 import { CalcService } from './@service/calc.service';
+import { CurrencyService } from './@service/currency.service';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,7 @@ import { CalcService } from './@service/calc.service';
     AngularFirestoreModule.enablePersistence(), // imports firebase/firestore, only needed for database features
     NgxCurrencyModule
   ],
-  providers: [AuthGuard, DatePipe, CurrencyPipe, EthService, PdfService, IpfsService, LocalStorageService, CalcService],
+  providers: [AuthGuard, DatePipe, CurrencyPipe, EthService, PdfService, IpfsService, LocalStorageService, CalcService, CurrencyService],
   bootstrap: [AppComponent],
   entryComponents: [FileComponent]
 })
