@@ -49,6 +49,11 @@
               <div class="col-7">
                 <strong>To:</strong>
                 <textarea [(ngModel)]="invoice.to" (ngModelChange)="onSaveInvoice();" name="toAddress" class="form-control address" placeholder="Address"></textarea>
+
+                <address>
+                  <strong>Date:</strong>
+                  <input [(ngModel)]="invoice.date" (ngModelChange)="onSaveInvoice();" name="invoiceDate" type="date" class="form-control">
+                </address>
               </div>
               <div class="col-5">
                 <p class="my-1 hidden-print">
@@ -58,16 +63,9 @@
                 <input id="fileLogo" (change)="onFile($event);" (ngModelChange)="onSaveInvoice();" style="display: none;" type="file" accept="image/jpeg,image/jpg,image/png,image/gif,image/svg"
                 />
                 <img *ngIf="invoice.logo" [src]="invoice.logo" class="mb-1" width="auto" height="50px" alt="CanInvoice">
+
+                <strong class="d-block mt-3">From:</strong>
                 <textarea [(ngModel)]="invoice.from" (ngModelChange)="onSaveInvoice();" name="fromAddress" class="form-control address" placeholder="Address"></textarea>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-7"></div>
-              <div class="col-5">
-                <address>
-                  <strong>Date:</strong>
-                  <input [(ngModel)]="invoice.date" (ngModelChange)="onSaveInvoice();" name="invoiceDate" type="date" class="form-control">
-                </address>
               </div>
             </div>
 
