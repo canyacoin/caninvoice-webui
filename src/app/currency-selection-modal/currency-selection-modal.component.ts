@@ -26,8 +26,8 @@ export class CurrencySelectionModalComponent implements OnInit {
 
   display: boolean = false
 
-  // cryptoCurrenciesEndpoint: string = 'https://api.coinmarketcap.com/v2/listings'
-  cryptoCurrenciesEndpoint: string = 'https://api.coinmarketcap.com/v1/ticker/'
+  cryptoCurrenciesEndpoint: string = 'https://api.coinmarketcap.com/v2/listings/'
+  // cryptoCurrenciesEndpoint: string = 'https://api.coinmarketcap.com/v1/ticker/'
 
   cryptoCurrencies: Array<any> = []
 
@@ -79,7 +79,7 @@ export class CurrencySelectionModalComponent implements OnInit {
       .then((res: any) => {
         // console.log(JSON.parse(res._body));
 
-        let data = JSON.parse(res._body);
+        let data = JSON.parse(res._body).data;
 
         data.forEach(item => {
           this.currencies.push({
