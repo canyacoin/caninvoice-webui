@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Http, Response, Headers } from '@angular/http';
 import { CurrencyService } from '@service/currency.service';
 
 declare var require: any
+declare var document: any
+declare var window: any
 
-const awesomplete = require('awesomplete')
 const _ = require('lodash')
 const fiatCurrencies = require('assets/json/fiat-currencies.json')
 
@@ -13,7 +14,15 @@ const fiatCurrencies = require('assets/json/fiat-currencies.json')
   templateUrl: './currency-selection-modal.component.html',
   styleUrls: ['./currency-selection-modal.component.css']
 })
+
 export class CurrencySelectionModalComponent implements OnInit {
+
+  currenciesInput: any
+
+  @ViewChild('currenciesInput') set input(input: ElementRef) {
+    this.currenciesInput = input
+  }
+
 
   display: boolean = false
 
@@ -22,6 +31,8 @@ export class CurrencySelectionModalComponent implements OnInit {
 
   cryptoCurrencies: Array<any> = []
 
+  hasLoadedCryptoCurrencies: boolean = false
+
   currencies: Array<any> = []
 
   constructor(
@@ -29,21 +40,36 @@ export class CurrencySelectionModalComponent implements OnInit {
     private http: Http) {
     currencyService.onDisplayCurrencySelectorModal.subscribe(display => {
       this.display = display;
+
+      setTimeout(() => {
+        this.getCryptoCurrencies();
+
+        new window.Awesomplete(this.currenciesInput.nativeElement, {
+          list: this.currencies
+        });
+      }, 1000)
+
     })
   }
 
   ngOnInit() {
-    this.getCryptoCurrencies();
 
     this.currencies = fiatCurrencies.map(item => {
       return {
-        label: item.name,
+        label: `${item.name} ${item.symbol}`,
         value: item.symbol
       }
     })
+
+  }
+
+  setCurrencyCode(){
+    this.display = false
   }
 
   getCryptoCurrencies() {
+    if (this.hasLoadedCryptoCurrencies) return false
+
     let headers = new Headers();
     headers.append('Accept', 'application/json')
 
@@ -51,14 +77,18 @@ export class CurrencySelectionModalComponent implements OnInit {
       headers: headers
     }).toPromise()
       .then((res: any) => {
-        console.log(JSON.parse(res._body));
+        // console.log(JSON.parse(res._body));
+
         let data = JSON.parse(res._body);
+
         data.forEach(item => {
           this.currencies.push({
-            label: item.name,
+            label: `${item.name} ${item.symbol}`,
             value: item.symbol
           })
         })
+
+        this.hasLoadedCryptoCurrencies = true
       })
       .catch(error => console.log(error));
   }

@@ -8,16 +8,15 @@
         <div class="modal-body">
           <div class="currency-search">
             <div class="input-group">
-              <input type="search" [(ngModel)]="currencyService.code" class="form-control">
+              <input type="search" [(ngModel)]="currencyService.code" class="form-control" #currenciesInput id="currencies-input">
               <div class="input-group-append">
-                <button class="btn btn-primary" type="button">Set currency</button>
+                <button class="btn btn-primary" type="button" (click)="setCurrencyCode()">Set currency</button>
               </div>
             </div>
           </div>
           <ul class="currencies-list">
             <li *ngFor="let currency of currencies">
-              <span class="name">{{ currency.label }}</span> -
-              <span class="symbol">{{ currency.value }}</span>
+              <span class="name">{{ currency.label }}</span>
             </li>
           </ul>
         </div>
