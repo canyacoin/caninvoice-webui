@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     items: [
       { title: 'Custom Logo + Style guide', quantity: 1, rate: '200' },
     ],
-    terms: 'Terms: To be paid in CanYaCoin 7 days from date of invoice, late payments will incur a 20% extra charge.\nETH address: ' + this.account + '.'
+    terms: `To be paid to Ethereum address: ${this.account}`
   };
 
   invoicesAsObject = JSON.parse( localStorage.getItem('invoices') ) || {};

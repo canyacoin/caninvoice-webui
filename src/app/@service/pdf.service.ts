@@ -75,10 +75,14 @@ export class PdfService {
             height: auto;
           }
           .terms {
+            margin-bottom: 42px;
             text-align: center;
           }
           .terms p {
             font-size: 12px;
+          }
+          .plug {
+            text-align: center;
           }
           .bold {
             font-weight: bold !important;
@@ -107,20 +111,20 @@ export class PdfService {
                 <table class="mb">
                   <tbody>
                     <tr>
-                      <td>
+                      <td colspan="1">
                         <h5 class="bold black">To:</h5>
                         <p>${invoice.to}</p>
                       </td>
-                      <td>
+                      <td colspan="1">
                         <img src="${invoice.logo}" class="logo"></img>
                       </td>
                     </tr>
                     <tr>
-                      <td>
+                      <td colspan="1">
                         <h5 class="bold black">Date:</h5>
                         <p>${invoice.date}</p>
                       </td>
-                      <td>
+                      <td colspan="1">
                         <h5 class="bold black">From:</h5>
                         <p>${invoice.from}</p>
                       </td>
@@ -175,7 +179,11 @@ export class PdfService {
                   </tbody>
                 </table>
                 <div class="terms">
+                  <h5 class="bold black">Terms</h5>
                   <p>${invoice.terms}</p>
+                </div>
+                <div class="plug">
+                  <small>Make invoices for free at <a href="https://caninvoice.io">caninvoice.io</a></small>
                 </div>
               </div>
             </body>`
