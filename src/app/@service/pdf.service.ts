@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
 import { IpfsService } from '@service/ipfs.service';
 import { CalcService } from '@service/calc.service';
+import { CurrencyService } from '@service/currency.service';
 import { LocalStorageService } from '@service/local-storage.service';
 import * as jsPDF from 'jspdf';
 
@@ -15,7 +16,8 @@ export class PdfService {
     private ipfs: IpfsService,
     private ls: LocalStorageService,
     private calc: CalcService,
-    private currency: CurrencyPipe) {}
+    private currency: CurrencyPipe,
+    private currencyService: CurrencyService) {}
 
   /**
    * [generate description]
@@ -35,18 +37,20 @@ export class PdfService {
           body {
             font-family: helvetica, sans-serif;
             font-weight: normal;
-            font-size: 16px;
-            color: #495057;
+            font-size: 12px;
+            color: #6c757d;
           }
           #invoice-wrapper {
             margin: 12pt 12pt 12pt 12pt;
             width: 560px;
           }
           h1 {
+            font-size: 24px;
           }
           h5 {
             margin-bottom: 9px;
             font-weight: bold;
+            font-size: 12px;
           }
           table {
             border-collapse: collapse;
@@ -79,7 +83,6 @@ export class PdfService {
           .bold {
             font-weight: bold !important;
             font-style: bold !important;
-            color: #000000;
           }
           .text-left {
             text-align: left !important;
@@ -87,39 +90,47 @@ export class PdfService {
           .text-center {
             text-align: center;
           }
+          .mb {
+            margin-bottom: 12pt;
+          }
+          .black {
+            color: #000000;
+          }
         </style>
       </head>
     `
 
     let body = `<body>
               <div id="invoice-wrapper">
-                <h1>Invoice #${invoice.id}</h1>
+                <h1 class="black">Invoice #${invoice.id}</h1>
                 <hr>
-                <table>
+                <table class="mb">
                   <tbody>
                     <tr>
                       <td>
-                        <h5 class="bold">To:</h5>
+                        <h5 class="bold black">To:</h5>
                         <p>${invoice.to}</p>
                       </td>
                       <td>
                         <img src="${invoice.logo}" class="logo"></img>
-                        <p>${invoice.from}</p>
                       </td>
                     </tr>
                     <tr>
-                      <td></td>
                       <td>
-                        <h5 class="bold">Date:</h5>
+                        <h5 class="bold black">Date:</h5>
                         <p>${invoice.date}</p>
+                      </td>
+                      <td>
+                        <h5 class="bold black">From:</h5>
+                        <p>${invoice.from}</p>
                       </td>
                     </tr>
                   </tbody>
                 </table>
-                <table class="invoice">
+                <table class="invoice mb">
                   <thead>
-                    <tr class="bold">
-                      <th class="text-left"><span class="bold">Item</span></th>
+                    <tr class="bold black">
+                      <th class="text-left"><span class="bold black">Item</span></th>
                       <th>Quantity</th>
                       <th>Rate</th>
                       <th>Amount</th>
@@ -131,8 +142,8 @@ export class PdfService {
       let tr = `<tr>
                   <td class="text-left">${item.title}</td>
                   <td>${item.quantity}</td>
-                  <td>${this.currency.transform(item.rate)}</td>
-                  <td>${this.currency.transform(item.rate * item.quantity)}</td>
+                  <td>${this.currency.transform(item.rate, this.currencyService.code, 'code')}</td>
+                  <td>${this.currency.transform(item.rate * item.quantity, this.currencyService.code, 'code')}</td>
                 </tr>`
       body += tr
     })
@@ -140,26 +151,26 @@ export class PdfService {
     body += `<tr>
                       <td></td>
                       <td></td>
-                      <td class="bold">Subtotal</td>
-                      <td>${this.currency.transform(this.calc.getSum(invoice))}</td>
+                      <td class="bold black">Subtotal</td>
+                      <td>${this.currency.transform(this.calc.getSum(invoice), this.currencyService.code, 'code')}</td>
                     </tr>
                     <tr>
                       <td></td>
                       <td></td>
-                      <td class="bold">Tax</td>
+                      <td class="bold black">Tax</td>
                       <td>${invoice.option.value.toString() + invoice.option.config.suffix}</td>
                     </tr>
                     <tr>
                       <td></td>
                       <td></td>
-                      <td class="bold">Amount Paid</td>
-                      <td>${this.currency.transform(invoice.paid)}</td>
+                      <td class="bold black">Amount Paid</td>
+                      <td>${this.currency.transform(invoice.paid, this.currencyService.code, 'code')}</td>
                     </tr>
                     <tr>
                       <td></td>
                       <td></td>
-                      <td class="bold">Balance Due</td>
-                      <td>${this.currency.transform(this.calc.getTotal(invoice))}</td>
+                      <td class="bold black">Balance Due</td>
+                      <td>${this.currency.transform(this.calc.getTotal(invoice), this.currencyService.code, 'code')}</td>
                     </tr>
                   </tbody>
                 </table>
