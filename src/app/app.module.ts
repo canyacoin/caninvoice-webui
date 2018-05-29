@@ -33,6 +33,7 @@ import { LocalStorageService } from './@service/local-storage.service';
 import { CalcService } from './@service/calc.service';
 import { CurrencyService } from './@service/currency.service';
 import { InfoService } from './@service/info.service';
+import { CurrencySelectionModalComponent } from './currency-selection-modal/currency-selection-modal.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { InfoService } from './@service/info.service';
     HomeComponent,
     PageNotFoundComponent,
     FileComponent,
-    FilesListComponent
+    FilesListComponent,
+    CurrencySelectionModalComponent
   ],
   imports: [
     BrowserModule,

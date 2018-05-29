@@ -36,12 +36,9 @@
                 </h2>
               </div>
               <div class="col-3">
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">Currency code:</span>
-                  </div>
-                  <input type="text" [(ngModel)]="currencyService.code" class="form-control" value="USD">
-                </div>
+                <nav class="text-right">
+                  <button class="btn btn-outline btn-primary" (click)="currencyService.displayCurrencySelectorModal()">Currency: {{ currencyService.code }}</button>
+                </nav>
               </div>
             </div>
             <hr>
