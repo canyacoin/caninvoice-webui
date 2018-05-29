@@ -63,8 +63,8 @@ export class CurrencySelectionModalComponent implements OnInit {
 
   }
 
-  setCurrencyCode(){
-    this.display = false
+  setCurrencyCode(code: string){
+    this.currencyService.code = code
   }
 
   getCryptoCurrencies() {
