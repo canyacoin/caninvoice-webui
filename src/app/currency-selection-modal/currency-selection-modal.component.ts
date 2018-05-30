@@ -47,6 +47,10 @@ export class CurrencySelectionModalComponent implements OnInit {
         new window.Awesomplete(this.currenciesInput.nativeElement, {
           list: this.currencies
         });
+
+        this.currenciesInput.nativeElement.addEventListener("awesomplete-select", function(event) {
+          currencyService.code = event.text.value;
+        });
       }, 1000)
 
     })
@@ -56,8 +60,8 @@ export class CurrencySelectionModalComponent implements OnInit {
 
     this.currencies = fiatCurrencies.map(item => {
       return {
-        label: `${item.name} ${item.symbol}`,
-        value: item.symbol
+        label: `${item.name} · ${item.cc} · ${item.symbol}`,
+        value: `${item.symbol} `
       }
     })
 
@@ -83,8 +87,8 @@ export class CurrencySelectionModalComponent implements OnInit {
 
         data.forEach(item => {
           this.currencies.push({
-            label: `${item.name} ${item.symbol}`,
-            value: item.symbol
+            label: `${item.name} · ${item.symbol}`,
+            value: `${item.symbol} `
           })
         })
 

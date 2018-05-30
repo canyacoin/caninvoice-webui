@@ -4,7 +4,7 @@ import { Observable, Subject } from 'rxjs';
 @Injectable()
 export class CurrencyService {
 
-  code: string = 'USD '
+  code: string = 'US$ '
 
   onDisplayCurrencySelectorModal: Subject<any> = new Subject<any>()
 
