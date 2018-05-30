@@ -26,8 +26,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
     || {
     id: '001',
     logo: 'assets/img/logo.svg',
-    to: 'Vitalik But.\nLevel 1 520 Bourke St\nMelbourne, VIC\nAustralia',
-    from: 'Vitalik But.\nLevel 1 520 Bourke St\nMelbourne, VIC\nAustralia',
+    to: 'Satoshi Nakamoto \n700 Cypherpunk Way \nSanta Clara, CA 95050, USA',
+    from: 'Vitalik But.\n520 ETHernal St\nKolomna, Moscow Oblast\nRussia',
     date: moment().format('YYYY-MM-DD'),
     option: { title: 'Tax', value: '0', type: 'Percent (%)', config: { prefix: '', suffix: ' %', precision: 0 } },
     paid: 0,
