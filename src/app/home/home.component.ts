@@ -32,7 +32,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     option: { title: 'Tax', value: '0', type: 'Percent (%)', config: { prefix: '', suffix: ' %', precision: 0 } },
     paid: 0,
     items: [
-      { title: 'Custom Logo + Style guide', quantity: 1, rate: '200' },
+      { title: 'Whitepaper writing service', quantity: 1, rate: '200' },
     ],
     terms: `To be paid to Ethereum address: ${this.account}`
   };
