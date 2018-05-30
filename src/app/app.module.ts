@@ -31,6 +31,9 @@ import { FileComponent } from './file/file.component';
 import { FilesListComponent } from './files-list/files-list.component';
 import { LocalStorageService } from './@service/local-storage.service';
 import { CalcService } from './@service/calc.service';
+import { CurrencyService } from './@service/currency.service';
+import { InfoService } from './@service/info.service';
+import { CurrencySelectionModalComponent } from './currency-selection-modal/currency-selection-modal.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +44,8 @@ import { CalcService } from './@service/calc.service';
     HomeComponent,
     PageNotFoundComponent,
     FileComponent,
-    FilesListComponent
+    FilesListComponent,
+    CurrencySelectionModalComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +60,7 @@ import { CalcService } from './@service/calc.service';
     AngularFirestoreModule.enablePersistence(), // imports firebase/firestore, only needed for database features
     NgxCurrencyModule
   ],
-  providers: [AuthGuard, DatePipe, CurrencyPipe, EthService, PdfService, IpfsService, LocalStorageService, CalcService],
+  providers: [AuthGuard, DatePipe, CurrencyPipe, EthService, PdfService, IpfsService, LocalStorageService, CalcService, CurrencyService, InfoService],
   bootstrap: [AppComponent],
   entryComponents: [FileComponent]
 })

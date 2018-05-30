@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ComponentFactory, ComponentRef, ComponentFactoryResolver, ViewContainerRef } from '@angular/core';
 import { IpfsService } from '@service/ipfs.service';
+import { InfoService } from '@service/info.service';
 import { LocalStorageService } from '@service/local-storage.service';
 import { FileComponent } from '../file/file.component';
 
@@ -28,7 +29,20 @@ export class FilesListComponent implements OnInit {
   constructor(
     private ipfs: IpfsService,
     private ls: LocalStorageService,
+    private info: InfoService,
     private resolver: ComponentFactoryResolver) {
+
+    info.onRemoveFiles.subscribe(filesIndexes => {
+      filesIndexes.forEach(index => {
+        _.remove(this.fileComponents, comp => {
+          if (comp.instance.ipfsHash == index) {
+            comp.destroy();
+          }
+
+          return comp.instance.index == index;
+        });
+      });
+    });
 
     ipfs.onFileAdded.subscribe(data => {
       this.hasNoFiles = false;

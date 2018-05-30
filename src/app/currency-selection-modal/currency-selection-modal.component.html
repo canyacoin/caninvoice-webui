@@ -1,0 +1,26 @@
+<div class="modal" *ngIf="display" id="currency-selection-modal">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-sm-6">
+        <nav class="mb-3 text-right">
+          <button class="btn btn-outline btn-light" (click)="display = false">Close <i class="fa fa-times-circle"></i></button>
+        </nav>
+        <div class="modal-body">
+          <div class="currency-search">
+            <div class="input-group">
+              <input type="search" [(ngModel)]="currencyService.code" class="form-control" #currenciesInput id="currencies-input">
+              <div class="input-group-append">
+                <button class="btn btn-primary" type="button" (click)="display = false">Set currency</button>
+              </div>
+            </div>
+          </div>
+          <ul class="currencies-list">
+            <li *ngFor="let currency of currencies" (click)="setCurrencyCode(currency.value)">
+              <span class="name">{{ currency.label }}</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

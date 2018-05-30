@@ -12,3 +12,75 @@
 $bold: 700;
 
 @import "./src/assets/sass/common/file-component";
+
+.input-group {
+  border: none;
+  .input-group {
+    border-left: 1px solid $input-border-color;
+  }
+  .input-group-text {
+    background-color: transparent;
+  }
+  .form-control {
+    padding-left: get-spacer(2) !important;
+    border: 1px solid $input-border-color !important;
+  }
+}
+
+.modal {
+  @include flex-column-center;
+  background-color: rgba($black, 0.7);
+  position: fixed;
+  z-index: 100000;
+  height: 100%;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  top: 0;
+  .modal-body {
+    border-radius: $border-radius-lg;
+    background-color: white;
+    // padding: get-spacer(3);
+    min-height: 350px;
+  }
+}
+
+#currency-selection-modal {
+  .modal-body {
+    position: relative;
+    padding: 0;
+  }
+  .currency-search {
+    @include flex-column-center;
+    padding: 0 get-spacer(3);
+    background-color: white;
+    position: relative;
+    min-height: 77px;
+    z-index: 20;
+  }
+  .currencies-list {
+    @include list-unstyled;
+    padding: 70px get-spacer(3) get-spacer(3) get-spacer(3);
+    overflow-y: scroll;
+    position: absolute;
+    padding-top: 91px;
+    max-height: 350px;
+    width: 100%;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 0;
+    li {
+      border-bottom: 1px solid $gray-100;
+      padding: get-spacer(1) 0;
+      &:hover {
+        background-color: $gray-100;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.awesomplete {
+  width: 68%;
+}
