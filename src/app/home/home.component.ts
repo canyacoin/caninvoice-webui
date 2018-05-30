@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   loading = false;
   state = 'loaded';
   balance = 0;
-  account = 'INSERT PUBLIC KEY HERE';
+  account = 'INSERT ETH ADDRESS HERE';
 
   firstTime = localStorage.getItem('firstTime') || 'YES';
   invoice = JSON.parse( localStorage.getItem( localStorage.getItem('currentInvoice') || '001') )
