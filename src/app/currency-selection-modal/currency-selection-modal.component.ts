@@ -1,6 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { Http, Response, Headers } from '@angular/http';
 import { CurrencyService } from '@service/currency.service';
+import { Http, Response, Headers } from '@angular/http';
+import { Subject } from 'rxjs';
 
 declare var require: any
 declare var document: any
@@ -35,28 +36,40 @@ export class CurrencySelectionModalComponent implements OnInit {
 
   currencies: Array<any> = []
 
+  onCryptoReady: Subject<any> = new Subject<any>()
+
   constructor(
     public currencyService: CurrencyService,
     private http: Http) {
+
+    this.onCryptoReady.subscribe(() => {
+      console.log('crypto ready')
+      this.currencies.sort(function(a, b) {
+        let textA = a.label.toUpperCase()
+        let textB = b.label.toUpperCase()
+        return (textA < textB) ? -1 : (textA > textB) ? 1 : 0
+      })
+    })
+
     currencyService.onDisplayCurrencySelectorModal.subscribe(display => {
       this.display = display;
 
       setTimeout(() => {
-        this.getCryptoCurrencies();
-
         new window.Awesomplete(this.currenciesInput.nativeElement, {
           list: this.currencies
-        });
+        })
 
         this.currenciesInput.nativeElement.addEventListener("awesomplete-select", function(event) {
-          currencyService.code = event.text.value;
-        });
+          currencyService.code = event.text.value
+        })
       }, 1000)
 
     })
   }
 
   ngOnInit() {
+
+    this.getCryptoCurrencies()
 
     this.currencies = fiatCurrencies.map(item => {
       return {
@@ -72,8 +85,6 @@ export class CurrencySelectionModalComponent implements OnInit {
   }
 
   getCryptoCurrencies() {
-    if (this.hasLoadedCryptoCurrencies) return false
-
     let headers = new Headers();
     headers.append('Accept', 'application/json')
 
@@ -81,20 +92,27 @@ export class CurrencySelectionModalComponent implements OnInit {
       headers: headers
     }).toPromise()
       .then((res: any) => {
-        // console.log(JSON.parse(res._body));
+        let crypto = JSON.parse(res._body).data;
 
-        let data = JSON.parse(res._body).data;
-
-        data.forEach(item => {
-          this.currencies.push({
-            label: `${item.name} · ${item.symbol}`,
-            value: `${item.symbol} `
-          })
-        })
-
-        this.hasLoadedCryptoCurrencies = true
+        this.addCryptoCurrencies(crypto)
       })
       .catch(error => console.log(error));
+  }
+
+  addCryptoCurrencies(crypto: Array<any>){
+    if (crypto.length <= 0) {
+      this.onCryptoReady.next(true)
+      return false
+    }
+
+    let item = crypto.pop()
+
+    this.currencies.push({
+      label: `${item.name} · ${item.symbol}`,
+      value: `${item.symbol} `
+    })
+
+    this.addCryptoCurrencies(crypto)
   }
 
 }
