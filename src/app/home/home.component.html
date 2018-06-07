@@ -90,7 +90,7 @@
                       <div class="drop-del-container">
                         <textarea [(ngModel)]="item.title" (ngModelChange)="onSaveInvoice();" name="title" rows="3" class="form-control description"></textarea>
                         <button *ngIf="i > 0" (click)="onRemoveItem(i, item);" class="delete-row hidden-print">
-                          <span class="ti-close fs-14 fw-600" aria-hidden="true"></span>
+                          <span class="fa fa-times-circle" aria-hidden="true"></span>
                         </button>
                       </div>
                     </td>
