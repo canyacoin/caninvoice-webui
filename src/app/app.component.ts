@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { PdfService } from '@service/pdf.service';
+
+declare var window: any
 
 @Component({
   selector: 'app-root',
@@ -6,5 +9,19 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+
+  title = 'app'
+
+  self: AppComponent
+
+  constructor(
+    public pdf: PdfService) {
+
+    this.self = this
+
+  }
+
+  onPrint(){
+    window.print()
+  }
 }

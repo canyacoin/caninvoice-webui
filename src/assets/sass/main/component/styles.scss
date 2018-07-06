@@ -1,17 +1,21 @@
-@import "./node_modules/bootstrap/scss/functions";
-@import "./src/assets/sass/_bootstrap-variables";
+@import "bootstrap/scss/functions";
+@import "sass/_bootstrap-variables";
 
-@import "./src/assets/sass/ebm-variables";
-@import "./node_modules/ebm/functions/ebm-functions";
-@import "./node_modules/ebm/helpers/ebm-helpers";
+@import "sass/ebm-variables";
+@import "ebm/functions/ebm-functions";
+@import "ebm/helpers/ebm-helpers";
 
-@import "./src/assets/sass/fontawesome/fontawesome";
-@import "./src/assets/sass/fontawesome/fa-brands";
-@import "./src/assets/sass/fontawesome/fa-solid";
+@import "sass/fontawesome/fontawesome";
+@import "sass/fontawesome/fa-brands";
+@import "sass/fontawesome/fa-solid";
 
 $bold: 700;
 
-@import "./src/assets/sass/common/file-component";
+@import "sass/common/file-component";
+
+body {
+  padding-top: $header-height-control;
+}
 
 .input-group {
   border: none;

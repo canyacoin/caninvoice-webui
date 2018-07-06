@@ -35,6 +35,8 @@ import { CurrencyService } from './@service/currency.service';
 import { InfoService } from './@service/info.service';
 import { CurrencySelectionModalComponent } from './currency-selection-modal/currency-selection-modal.component';
 
+import { CommonLibModule } from '@canyaio/common-lib';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -58,7 +60,8 @@ import { CurrencySelectionModalComponent } from './currency-selection-modal/curr
     AngularFireDatabaseModule, // imports firebase/database, only needed for database features
     // AngularFireAuthModule, // imports firebase/auth, only needed for auth features
     AngularFirestoreModule.enablePersistence(), // imports firebase/firestore, only needed for database features
-    NgxCurrencyModule
+    NgxCurrencyModule,
+    CommonLibModule
   ],
   providers: [AuthGuard, DatePipe, CurrencyPipe, EthService, PdfService, IpfsService, LocalStorageService, CalcService, CurrencyService, InfoService],
   bootstrap: [AppComponent],

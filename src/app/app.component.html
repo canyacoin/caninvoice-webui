@@ -1,3 +1,21 @@
-<router-outlet></router-outlet>
+<canyalib-header
+  class="d-print-none"
+  [logo]="{ src: 'assets/img/CanInvoice.svg', alt: 'CanInvoice Logo', routerLink: ['/home'] }"
+  [buttons]="[{ index: 0, innerHtml: 'header.save-to-pdf', class: 'btn btn-primary btn-outline btn-sm', onClick: [self, 'onPrint'] },{ index: 1, innerHtml: 'header.share-with-client', class: 'btn btn-primary btn-sm', onClick: [pdf, 'generate'] }]">
+  </canyalib-header>
 
 <app-currency-selection-modal></app-currency-selection-modal>
+
+<canyalib-language-switch class="d-print-none" [exclude]="[]"></canyalib-language-switch>
+
+
+<router-outlet></router-outlet>
+
+
+<div id="bancor-wc" class="hidden-print"></div>
+
+<canyalib-cards class="d-print-none" [exclude]="['CanInvoice', 'CanFund']"></canyalib-cards>
+
+<canyalib-footer-section class="d-print-none"></canyalib-footer-section>
+
+<canyalib-footer class="d-print-none"></canyalib-footer>

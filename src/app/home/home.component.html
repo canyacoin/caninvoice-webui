@@ -1,6 +1,6 @@
-<app-top class="hidden-print" [state]="state" [invoicesList]="invoicesAsList" (print)="onPrint();" (invoiceSelected)="onInvoiceSelected($event);"></app-top>
+<!-- <app-top class="hidden-print" [state]="state" [invoicesList]="invoicesAsList" (print)="onPrint();" (invoiceSelected)="onInvoiceSelected($event);"></app-top>
 
-<app-header class="hidden-print"></app-header>
+<app-header class="hidden-print"></app-header> -->
 
 <app-files-list *ngIf="state === 'loaded'"></app-files-list>
 
@@ -181,5 +181,5 @@
 </main>
 <!-- END Main container -->
 
-<div id="bancor-wc" class="hidden-print"></div>
-<app-footer *ngIf="state === 'loaded'" class="hidden-print"></app-footer>
+<!-- <div id="bancor-wc" class="hidden-print"></div>
+<app-footer *ngIf="state === 'loaded'" class="hidden-print"></app-footer> -->

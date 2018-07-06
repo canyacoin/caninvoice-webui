@@ -21,8 +21,14 @@
               "src/favicon.ico"
             ],
             "styles": [
-              "src/styles.css"
+              "src/assets/sass/main/component/styles.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/assets",
+                "node_modules"
+              ]
+            },
             "scripts": []
           },
           "configurations": {
