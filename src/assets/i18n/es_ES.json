@@ -21,6 +21,37 @@
     "CanSeek": "Contrata y sé contratado usando tecnología decentralizada",
     "check-it-out": "Ver la app"
   },
+  "home": {
+    "sitewide-notice": "<strong>CanInvoice</strong> permite hacer facturas 100% gratis. Tus facturas se guardan en tu dispositivo automáticamente.",
+    "invoice": "Factura",
+    "currency": "Divisa",
+    "to": "Para",
+    "date": "Fecha",
+    "change-logo": "Cambiar logo",
+    "remove-logo": "Remover logo",
+    "from": "De",
+    "item": "Concepto",
+    "quantity": "Cantidad",
+    "rate": "Tarifa",
+    "amount": "Monto",
+    "add-item": "Añadir concepto",
+    "subtotal": "Subtotal",
+    "flat": "tarifa plana",
+    "percent": "Porcentaje",
+    "amount-paid": "Monto pagado",
+    "balance-due": "Por pagar",
+    "terms": "Términos"
+  },
   "footer-section-notice": "Únete a nuestra comunidad en Telegram",
-  "footer-section-cta": "CanYa en Telegram"
+  "footer-section-cta": "CanYa en Telegram",
+  "close": "Cerrar",
+  "set-currency": "Fijar divisa",
+  "tax": "Impuesto",
+  "still-working": "aún trabajando...",
+  "view-pdf": "Ver PDF",
+  "copy-file-link": "Copiar vínculo",
+  "share-by-email": "Compartir por email",
+  "remove": "Quitar",
+  "copied": "Copiado!",
+  "share-via-canshare": "Compartir via CanShare"
 }

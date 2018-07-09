@@ -21,6 +21,37 @@
     "CanSeek": "Hire and be hired with decentralised technology.",
     "check-it-out": "Check it out"
   },
+  "home": {
+    "sitewide-notice": "<strong>CanInvoice</strong> lets you make invoices 100% FREE. No sign up! Invoices are auto-saved to your device/browser.",
+    "invoice": "Invoice",
+    "currency": "Currency",
+    "to": "To",
+    "date": "Date",
+    "change-logo": "Change logo",
+    "remove-logo": "Remove logo",
+    "from": "From",
+    "item": "Item",
+    "quantity": "Quantity",
+    "rate": "Rate",
+    "amount": "Amount",
+    "add-item": "Add item",
+    "subtotal": "Subtotal",
+    "flat": "Flat",
+    "percent": "Percent",
+    "amount-paid": "Amount Paid",
+    "balance-due": "Balance Due",
+    "terms": "Terms"
+  },
   "footer-section-notice": "Got another question? Ask our active community on Telegram.",
-  "footer-section-cta": "Join us on Telegram"
+  "footer-section-cta": "Join us on Telegram",
+  "close": "Close",
+  "set-currency": "Set currency",
+  "tax": "Tax",
+  "still-working": "still working...",
+  "view-pdf": "View PDF",
+  "copy-file-link": "Copy file link",
+  "share-by-email": "Share by email",
+  "remove": "Remove",
+  "copied": "Copied!",
+  "share-via-canshare": "Share via CanShare"
 }

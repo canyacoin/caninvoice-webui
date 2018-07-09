@@ -6,7 +6,7 @@
     <span class="name">{{ name }}</span>
   </div>
   <div class="still-working" *ngIf="streamEnded">
-    <span>still working</span>
+    <span>{{ 'still-working' | translate }}</span>
   </div>
   <div class="file-size" *ngIf="!isUploading">
     <span>{{ filesize(size) }}</span>
@@ -15,10 +15,10 @@
     <div class="dropdown-wrapper">
       <i class="fa fa-ellipsis-v"></i>
       <div class="dropdown">
-        <a class="item" href="{{ canShareLink }}" target="_blank"><span>Share via CanShare <i class="fa fa-share-alt"></i></span></a>
-        <a class="item" href="{{ ipfsLink }}" target="_blank"><span>View PDF <i class="fa fa-external-link-alt"></i></span></a>
-        <span class="item copy-{{ipfsHash}}">Copy file link</span>
-        <span class="item text-danger" (click)="info.removeFiles([ipfsHash])">Remove</span>
+        <a class="item" href="{{ canShareLink }}" target="_blank"><span>{{ 'share-via-canshare' | translate }} <i class="fa fa-share-alt"></i></span></a>
+        <a class="item" href="{{ ipfsLink }}" target="_blank"><span>{{ 'view-pdf' | translate }} <i class="fa fa-external-link-alt"></i></span></a>
+        <span class="item copy-{{ipfsHash}}">{{ copiedText | translate }}</span>
+        <span class="item text-danger" (click)="info.removeFiles([ipfsHash])">{{ 'remove' | translate }}</span>
       </div>
     </div>
   </div>

@@ -1,7 +1,3 @@
-<!-- <app-top class="hidden-print" [state]="state" [invoicesList]="invoicesAsList" (print)="onPrint();" (invoiceSelected)="onInvoiceSelected($event);"></app-top>
-
-<app-header class="hidden-print"></app-header> -->
-
 <app-files-list *ngIf="state === 'loaded'"></app-files-list>
 
 <!-- Main container -->
@@ -16,7 +12,7 @@
     <div class="container">
 
       <div *ngIf="firstTime === 'YES'" class="alert alert-success alert-dismissible fade show hidden-print" role="alert" style="margin-top: -12px;">
-        <strong>CanInvoice</strong> lets you make invoices 100% FREE. No sign up! Invoices are auto-saved to your device/browser.
+        <div [innerHTML]="'home.sitewide-notice' | translate | keepHtml"></div>
         <button (click)="onFirstTime();" type="button" class="close" data-dismiss="alert" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -30,38 +26,38 @@
 
             <div class="row align-items-center">
               <div class="col-9">
-                <h2 class="m-0">Invoice #
+                <h2 class="m-0">{{ 'home.invoice' | translate }} #
                   <input [(ngModel)]="invoice.id" (ngModelChange)="onNewInvoice();" name="invoiceId" class="form-control d-inline fs-30"
                     type="text" placeholder="Invoice id">
                 </h2>
               </div>
               <div class="col-3">
                 <nav class="text-right">
-                  <button class="btn btn-outline btn-primary" (click)="currencyService.displayCurrencySelectorModal()">Currency: {{ currencyService.code }}</button>
+                  <button class="btn btn-outline btn-primary" (click)="currencyService.displayCurrencySelectorModal()">{{ 'home.currency' | translate }}: {{ currencyService.code }}</button>
                 </nav>
               </div>
             </div>
             <hr>
             <div class="row">
               <div class="col-7">
-                <strong>To:</strong>
+                <strong>{{ 'home.to' | translate }}:</strong>
                 <textarea [(ngModel)]="invoice.to" (ngModelChange)="onSaveInvoice();" name="toAddress" class="form-control address" placeholder="Address"></textarea>
 
                 <address>
-                  <strong>Date:</strong>
+                  <strong>{{ 'home.date' | translate }}:</strong>
                   <input [(ngModel)]="invoice.date" (ngModelChange)="onSaveInvoice();" name="invoiceDate" type="date" class="form-control">
                 </address>
               </div>
               <div class="col-5">
                 <p class="my-1 hidden-print">
-                  <a href="#" (click)="onChangeLogo();">Change logo</a> |
-                  <a href="#" (click)="onRemoveLogo();">Remove logo</a>
+                  <a href="#" (click)="onChangeLogo();">{{ 'home.change-logo' | translate }}</a> |
+                  <a href="#" (click)="onRemoveLogo();">{{ 'home.remove-logo' | translate }}</a>
                 </p>
                 <input id="fileLogo" (change)="onFile($event);" (ngModelChange)="onSaveInvoice();" style="display: none;" type="file" accept="image/jpeg,image/jpg,image/png,image/gif,image/svg"
                 />
                 <img *ngIf="invoice.logo" [src]="invoice.logo" class="mb-1" width="auto" height="50px" alt="CanInvoice">
 
-                <strong class="d-block mt-3">From:</strong>
+                <strong class="d-block mt-3">{{ 'home.from' | translate }}:</strong>
                 <textarea [(ngModel)]="invoice.from" (ngModelChange)="onSaveInvoice();" name="fromAddress" class="form-control address" placeholder="Address"></textarea>
               </div>
             </div>
@@ -71,16 +67,16 @@
                 <thead>
                   <tr>
                     <th style="min-width: 400px;">
-                      <strong>Item</strong>
+                      <strong>{{ 'home.item' | translate }}</strong>
                     </th>
                     <th class="text-center">
-                      <strong>Quantity</strong>
+                      <strong>{{ 'home.quantity' | translate }}</strong>
                     </th>
                     <th class="text-center">
-                      <strong>Rate</strong>
+                      <strong>{{ 'home.rate' | translate }}</strong>
                     </th>
                     <th class="text-center" style="min-width: 100px;">
-                      <strong>Amount</strong>
+                      <strong>{{ 'home.amount' | translate }}</strong>
                     </th>
                   </tr>
                 </thead>
@@ -107,13 +103,13 @@
                   </tr>
                   <tr class='hidden-print'>
                     <td colspan="4">
-                      <button (click)="onAddItem();" class="btn btn-sm btn-success">Add item</button>
+                      <button (click)="onAddItem();" class="btn btn-sm btn-success">{{ 'home.add-item' | translate }}</button>
                     </td>
                   </tr>
                   <tr>
                     <td colspan="2" class="thick-line"></td>
                     <td class="thick-line text-center">
-                      <strong>Subtotal</strong>
+                      <strong>{{ 'home.subtotal' | translate }}</strong>
                     </td>
                     <td class="thick-line text-center">
                       <div>{{ getSum() | currency:currencyService.code:'code' }}</div>
@@ -133,8 +129,8 @@
                           <a id="dropdownOptions" href="#" class="dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">&nbsp;</a>
 
                           <div class="dropdown-menu" aria-labelledby="dropdownOptions">
-                            <button class="btn dropdown-item" (click)="onOption('Flat ($)');" [ngClass]="{ 'active': invoice.option.type === 'Flat ($)' }">&nbsp;&nbsp;Flat ($)</button>
-                            <button class="btn dropdown-item" (click)="onOption('Percent (%)');" [ngClass]="{ 'active': invoice.option.type === 'Percent (%)' }">&nbsp;&nbsp;Percent (%)</button>
+                            <button class="btn dropdown-item" (click)="onOption('Flat ($)');" [ngClass]="{ 'active': invoice.option.type === 'Flat ($)' }">&nbsp;&nbsp;{{ 'home.flat' | translate }} ($)</button>
+                            <button class="btn dropdown-item" (click)="onOption('Percent (%)');" [ngClass]="{ 'active': invoice.option.type === 'Percent (%)' }">&nbsp;&nbsp;{{ 'home.percent' | translate }} (%)</button>
                           </div>
                         </div>
                       </div>
@@ -143,7 +139,7 @@
                   <tr>
                     <td colspan="2" class="no-line"></td>
                     <td class="no-line text-center">
-                      <strong>Amount Paid</strong>
+                      <strong>{{ 'home.amount-paid' | translate }}</strong>
                     </td>
                     <td class="no-line">
                       <textarea currencyMask [options]="{ prefix: currencyService.code }" [(ngModel)]="invoice.paid" (ngModelChange)="onSaveInvoice();" name="paid" class="form-control text-center"
@@ -153,7 +149,7 @@
                   <tr>
                     <td colspan="2" class="no-line"></td>
                     <td class="no-line text-center">
-                      <strong>Balance Due</strong>
+                      <strong>{{ 'home.balance-due' | translate }}</strong>
                     </td>
                     <td class="no-line text-center">
                       <div>{{ getTotal() | currency:currencyService.code:'code' }}</div>
@@ -162,7 +158,7 @@
                 </tbody>
               </table>
               <div class="m-5">
-                <h5 class="text-center">Terms</h5>
+                <h5 class="text-center">{{ 'home.terms' | translate }}</h5>
                 <textarea [(ngModel)]="invoice.terms" (ngModelChange)="onSaveInvoice();" name="terms" class="form-control text-center"></textarea>
               </div>
             </div>
@@ -180,6 +176,3 @@
 
 </main>
 <!-- END Main container -->
-
-<!-- <div id="bancor-wc" class="hidden-print"></div>
-<app-footer *ngIf="state === 'loaded'" class="hidden-print"></app-footer> -->
